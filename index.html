@@ -434,7 +434,7 @@ window.addEventListener('pointerup',()=>{ if(!dragging)return; dragging=false;tr
 function step(dir){ const f=floatIdx(); let t; if(dir>0){t=Math.floor(f+0.01)+1}else{t=Math.ceil(f-0.01)-1}
   if(t<0){track.scrollTo({left:0,behavior:'smooth'});return} if(t>N-1){track.scrollTo({left:track.scrollWidth,behavior:'smooth'});return} walkTo(t)}
 $('#btnPrev').onclick=()=>step(-1); $('#btnNext').onclick=()=>step(1); $('#btnTop').onclick=()=>walkTo(0);
-hallw.addEventListener('click',e=>{ if(moved>5)return; const d=e.target.closest('.door'); if(!d)return; const i=+d.dataset.i; if(i===cur)enter(i); else walkTo(i)});
+hallw.addEventListener('click',e=>{ if(moved>5)return; const d=e.target.closest('.door'); if(!d)return; const i=+d.dataset.i; if(i===cur)enter(i); else {walkTo(i); setTimeout(()=>{if(inRoom<0)enter(i)},650)}});
 
 /* ---------- room ---------- */
 const roomEl=$('#room'), hall=$('#hall'); let inRoom=-1, savedScroll=0, selTile=null;
